@@ -4,4 +4,4 @@ I'm Roël Couwenberg, a flexible all-round developer and designer from the Nethe
 I'm a student at Avans University studying Computer Science and I'm currently working on small projects and games.
 
 [My Website](https://roelc.me)  
-[My Company](https://avametix.com)
+[My Agency](https://avametix.com)
