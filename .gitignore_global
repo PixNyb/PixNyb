@@ -1,0 +1,46 @@
+# Visual Studio Code
+.vscode/
+.idea/
+.sublime-*/
+
+# Node.js dependencies
+node_modules/
+
+# Compiled code
+dist/
+build/
+out/
+target/
+bin/
+obj/
+
+# Compiled files
+*.pyc
+*.class
+*.o
+*.ko
+*.a
+*.exe
+*.out
+*.so
+*.dll
+*.dylib
+
+# Log files
+*.log
+
+# Archives
+*.zip
+*.rar
+*.gz
+*.tar.gz
+*.7z
+*.tgz
+*.bzip
+
+# Environment variables
+.env
+
+# SQLite database
+*.sqlite
+*.sqlite3
