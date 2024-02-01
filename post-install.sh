@@ -89,3 +89,16 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "GPG $KEYID:"
     gpg --armor --export $KEYID
 fi
+
+# Ask if the user wants to set up wakatime time tracking
+read -p "Set up wakatime time tracking? (y/n) " -n 1 -r
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    read -p "Enter your wakatime api key: "
+
+    # Insert the api key into the wakatime config file
+    echo "
+[settings]
+api_key = $REPLY
+" >> ~/.wakatime.cfg
+fi
