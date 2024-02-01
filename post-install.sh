@@ -5,6 +5,8 @@
 #########################################################
 
 # Update package lists
+sudo apt remove git -y
+sudo add-apt-repository ppa:git-core/ppa -y
 sudo apt update -y && sudo apt upgrade -y
 
 # Install git
@@ -50,9 +52,14 @@ setup_git() {
     git config --global commit.template ~/.gitmessage
     git config --global init.defaultBranch main
     git config --global pull.rebase true
+    git config --global push.autoSetupRemote true
     git config --global rebase.autoStash true
     git config --global core.editor "vim"
     git config --global core.excludesfile ~/.gitignore_global
+
+    # Setup commit signing
+    git config --global user.signingkey ~/.ssh/id_rsa
+    git config --global gpg.format ssh
 }
 
 # Install apps
