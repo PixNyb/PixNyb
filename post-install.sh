@@ -56,10 +56,22 @@ setup_git() {
     git config --global rebase.autoStash true
     git config --global core.editor "vim"
     git config --global core.excludesfile ~/.gitignore_global
+}
 
-    # Setup commit signing
-    git config --global user.signingkey ~/.ssh/id_rsa
-    git config --global gpg.format ssh
+setup_gpg() {
+    # Setup a gpg key
+    gpg --full-gen-key --batch <(echo "Key-Type: 1"; \
+        echo "Key-Length: 4096"; \
+        echo "Subkey-Type: 1"; \
+        echo "Subkey-Length: 4096"; \
+        echo "Expire-Date: 0"; \
+        echo "Name-Real: Roël Couwenberg"; \
+        echo "Name-Email: contact@roelc.me"; \
+        echo "%no-protection"; )
+
+    KEYID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2)
+
+    git config --global user.signingkey $KEYID
 }
 
 # Install apps
@@ -68,4 +80,12 @@ install_asdf
 install_trunk_cli
 setup_git
 
-echo "Done, please don't forget to set up ssh commit signing:\nhttps://docs.github.com/en/github/authenticating-to-github/managing-commit-signature-verification"
+# Ask if the user wants to set up gpg commit signing
+read -p "Set up gpg commit signing? (y/n) " -n 1 -r
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    setup_gpg
+
+    echo "GPG $KEYID:"
+    gpg --armor --export $KEYID
+fi

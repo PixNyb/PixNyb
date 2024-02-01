@@ -34,12 +34,23 @@ check_color_support() {
     fi
 }
 
-# Check if gpg agent is running and git signing is enabled
-check_secure_commits() {
-    if [ -z "$GPG_AGENT_INFO" ]; then
-        echo -e "${RED}GPG agent is not running. Please run 'gpgconf --launch gpg-agent'${NC}"
+# Start gpg agent
+start_gpg_agent() {
+    # Start the gpg and ssh agents
+    if [ ! $(pgrep -u "$USER" gpg-agent) ] >/dev/null; then
+        gpg-agent --daemon &>/dev/null
     fi
 
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        eval $(ssh-agent -s) &>/dev/null
+    fi
+
+    eval $(/usr/bin/keychain --eval --nogui --agents gpg,ssh --inherit any -q $(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2))
+    source ~/.keychain/$HOSTNAME-sh
+}
+
+# Check if git signing is enabled
+check_secure_commits() {
     if ! git config --get commit.gpgsign >/dev/null 2>&1; then
         echo -e "${RED}Git signing is not enabled. Please run 'git config --global commit.gpgsign true'${NC}"
     fi
