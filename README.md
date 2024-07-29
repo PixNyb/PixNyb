@@ -1,6 +1,7 @@
 ### It seems you've found my GitHub profile! Welcome.
 
-I'm Roël Couwenberg, a flexible all-round developer and designer from the Netherlands.
-I'm a student at Avans University studying Computer Science and I'm currently working on small projects and games.
+I'm Roël Couwenberg, a curious and motivated developer from ’s-Hertogenbosch with a passion for cloud, DevOps, and (web) applications. Driven by the challenge of solving complex technical problems, I strive to continuously deliver value to projects and organizations.
 
 [Check out](https://firstordefault.nl) what I do for others.
+
+Or explore [my portfolio](https://roelc.me).
